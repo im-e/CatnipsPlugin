@@ -5,10 +5,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Catnips extends JavaPlugin {
 
+
     @Override
     public void onEnable()
     {
-        getServer().getPluginManager().registerEvents(new CatnipsEvents(), this);
+        getServer().getPluginManager().registerEvents(new CatnipsEvents(this), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Catnips]: Plugin is enabled!");
 
     }

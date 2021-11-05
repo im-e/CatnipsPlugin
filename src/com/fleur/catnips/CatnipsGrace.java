@@ -1,30 +1,30 @@
 package com.fleur.catnips;
 
-import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class CatnipsGrace {
 
-    private final HashMap<Player, Date> playerSpawnTime = new HashMap<>();
+    private HashMap<UUID, Date> graceTimes = new HashMap<>();
 
-    public Date getGraceTime(Player player) {
-        return playerSpawnTime.get(player);
-
+    public Date getGraceTime(UUID uuid) {
+        return graceTimes.get(uuid);
     }
 
-    public void setGraceTime(Player player, Date date) {
-        playerSpawnTime.put(player, date);
+    public void setGraceTime(UUID uuid, Date date) {
+        graceTimes.put(uuid, date);
     }
 
-    public void setGraceTimeFromCurrent(Player player, Date date) {
+    public void setGraceTimeFromCurrent(UUID uuid, Date date) {
         Date grace = new Date(date.getTime()+1000*60*60); //milli->second->minute->hour (1 hour grace)
-        playerSpawnTime.put(player, grace);
+        graceTimes.put(uuid, grace);
     }
 
-    public Boolean dateInGrace(Player player, Date date) {
-        Date grace = getGraceTime(player);
+    public Boolean dateInGrace(UUID uuid, Date date) {
+        Date grace = getGraceTime(uuid);
         int result =  date.compareTo(grace);
         if (result <= 0) {
             return true;
@@ -33,4 +33,5 @@ public class CatnipsGrace {
             return false;
         }
     }
+
 }
