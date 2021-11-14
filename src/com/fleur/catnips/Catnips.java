@@ -9,8 +9,9 @@ public class Catnips extends JavaPlugin {
     @Override
     public void onEnable()
     {
-        getServer().getPluginManager().registerEvents(new CatnipsEvents(this), this);
+        getServer().getPluginManager().registerEvents(new CatnipsEvents(), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Catnips]: Plugin is enabled!");
+        loadConfig();
 
     }
 
@@ -18,5 +19,11 @@ public class Catnips extends JavaPlugin {
     public void onDisable()
     {
         getServer().getConsoleSender().sendMessage(ChatColor.RED +"[Catnips]: Plugin is disabled!");
+    }
+
+    public void loadConfig()
+    {
+        getConfig().options().copyDefaults(true);
+        saveConfig();
     }
 }
